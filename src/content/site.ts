@@ -2,6 +2,8 @@ export const site = {
   name: "Alexandros D.",
   role: "Développeur web — sites vitrines",
   area: "Bruxelles · France & Belgique",
+  company: "AlexTechTrade",
+  bce: "BE 1031.651.121",
   malt: "https://www.malt.fr/profile/alexandrosdrimis",
   socials: [
     { label: "Malt", href: "https://www.malt.fr/profile/alexandrosdrimis" },
