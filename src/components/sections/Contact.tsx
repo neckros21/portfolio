@@ -32,6 +32,23 @@ export function Contact() {
             <span>↗</span>
           </motion.a>
         </Reveal>
+        <Reveal delay={0.4}>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <span className="text-sm text-dim">Ou retrouvez-moi sur</span>
+            {site.socials.slice(1).map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener"
+                className="group inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-lime hover:text-lime"
+              >
+                {s.label}
+                <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+              </a>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

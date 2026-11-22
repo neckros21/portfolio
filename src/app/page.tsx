@@ -12,7 +12,7 @@ const jsonLd = {
   name: site.name,
   jobTitle: "Développeur web",
   url: site.url,
-  sameAs: [site.malt],
+  sameAs: site.socials.map((s) => s.href),
   address: { "@type": "PostalAddress", addressLocality: "Bruxelles", addressCountry: "BE" },
   knowsAbout: site.stack,
 };

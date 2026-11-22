@@ -3,6 +3,11 @@ export const site = {
   role: "Développeur web — sites vitrines",
   area: "Bruxelles · France & Belgique",
   malt: "https://www.malt.fr/profile/alexandrosdrimis",
+  socials: [
+    { label: "Malt", href: "https://www.malt.fr/profile/alexandrosdrimis" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/adrimis-407758203" },
+    { label: "Instagram", href: "https://www.instagram.com/alex.drimis/" },
+  ],
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-alexandros.vercel.app",
   description:
     "Alexandros D., développeur web à Bruxelles : sites vitrines modernes, rapides et bien référencés pour commerçants, artisans et PME. Découvrez mes réalisations.",
