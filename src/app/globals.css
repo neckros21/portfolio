@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night: #0c0c0d;
+  --color-night-2: #151517;
+  --color-line: #26262a;
+  --color-snow: #f2f1ee;
+  --color-dim: #8d8c89;
+  --color-lime: #c9f36b;
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --spacing-18: 4.5rem;
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+body {
+  background: var(--color-night);
+  color: var(--color-snow);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-night);
+}
+
+.link-underline {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}

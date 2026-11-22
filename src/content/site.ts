@@ -1,0 +1,63 @@
+export const site = {
+  name: "Alexandros D.",
+  role: "Développeur web — sites vitrines",
+  area: "Bruxelles · France & Belgique",
+  malt: "https://www.malt.fr/profile/alexandrosdrimis",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-alexandros.vercel.app",
+  description:
+    "Alexandros D., développeur web à Bruxelles : sites vitrines modernes, rapides et bien référencés pour commerçants, artisans et PME. Découvrez mes réalisations.",
+  nav: [
+    { href: "#projets", label: "Projets" },
+    { href: "#offre", label: "Offre" },
+    { href: "#contact", label: "Contact" },
+  ],
+  hero: {
+    title: "Des sites vitrines qui donnent envie de vous contacter.",
+    text: "Je conçois et développe des sites modernes, rapides et faciles à trouver sur Google, pour les commerçants, artisans et PME. Développeur full-stack chez AXA Belgique, j'apporte la même rigueur à chaque projet.",
+  },
+  stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "SEO", "Vercel", "Responsive design"],
+  projects: [
+    {
+      slug: "boulangerie",
+      name: "Maison Aurèle",
+      sector: "Boulangerie-pâtisserie",
+      text: "Une ambiance chaleureuse et gourmande : grandes photos, typographie élégante, commande en click & collect et horaires clairs.",
+      features: ["Click & collect", "Horaires + carte", "Animations au scroll"],
+      colors: ["#f6f0e6", "#8a5a35", "#2a1e16"],
+      image: "/previews/boulangerie.jpg",
+      url: process.env.NEXT_PUBLIC_URL_BOULANGERIE ?? "",
+    },
+    {
+      slug: "artisan",
+      name: "Ardent Rénovation",
+      sector: "Artisan rénovation",
+      text: "Un site sobre et rassurant qui inspire confiance : services détaillés, comparateurs avant/après et demande de devis guidée.",
+      features: ["Avant / après interactif", "Formulaire de devis", "Zone d'intervention"],
+      colors: ["#f3f2ee", "#e8622a", "#1c2126"],
+      image: "/previews/artisan.jpg",
+      url: process.env.NEXT_PUBLIC_URL_ARTISAN ?? "",
+    },
+    {
+      slug: "coiffure",
+      name: "Salon Ivoire",
+      sector: "Coiffure & beauté",
+      text: "Un univers luxe et épuré : tarifs par onglets, galerie à défilement horizontal et prise de rendez-vous en ligne.",
+      features: ["Prise de rendez-vous", "Galerie horizontale", "Tarifs par catégorie"],
+      colors: ["#faf7f3", "#a8845f", "#161413"],
+      image: "/previews/coiffure.jpg",
+      url: process.env.NEXT_PUBLIC_URL_COIFFURE ?? "",
+    },
+  ],
+  offer: [
+    { title: "Sur mesure", text: "Un design unique à votre image, pas un template générique." },
+    { title: "Parfait sur mobile", text: "Plus de 70 % de vos visiteurs viennent d'un téléphone." },
+    { title: "Rapide et bien référencé", text: "Optimisé pour Google : chargement instantané, balises et données structurées." },
+    { title: "Mise en ligne incluse", text: "Nom de domaine, hébergement et formulaire de contact gérés pour vous." },
+  ],
+  steps: [
+    { title: "Échange", text: "20 minutes pour comprendre votre activité et vos objectifs." },
+    { title: "Maquette", text: "Une proposition visuelle à valider avant tout développement." },
+    { title: "Développement", text: "Votre site prend vie, avec des points réguliers." },
+    { title: "Mise en ligne", text: "Lancement, vérifications, puis suivi après livraison." },
+  ],
+} as const;
