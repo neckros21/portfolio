@@ -8,7 +8,7 @@ export const site = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/adrimis-407758203" },
     { label: "Instagram", href: "https://www.instagram.com/alex.drimis/" },
   ],
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-alexandros.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://alexandros-drimis.vercel.app",
   description:
     "Alexandros D., développeur web à Bruxelles : sites vitrines modernes, rapides et bien référencés pour commerçants, artisans et PME. Découvrez mes réalisations.",
   nav: [
@@ -30,7 +30,7 @@ export const site = {
       features: ["Click & collect", "Horaires + carte", "Animations au scroll"],
       colors: ["#f6f0e6", "#8a5a35", "#2a1e16"],
       image: "/previews/boulangerie.jpg",
-      url: process.env.NEXT_PUBLIC_URL_BOULANGERIE ?? "",
+      url: "https://boulangerie-demo-eight.vercel.app",
     },
     {
       slug: "artisan",
@@ -40,7 +40,7 @@ export const site = {
       features: ["Avant / après interactif", "Formulaire de devis", "Zone d'intervention"],
       colors: ["#f3f2ee", "#e8622a", "#1c2126"],
       image: "/previews/artisan.jpg",
-      url: process.env.NEXT_PUBLIC_URL_ARTISAN ?? "",
+      url: "https://artisan-demo-ebon.vercel.app",
     },
     {
       slug: "coiffure",
@@ -50,7 +50,7 @@ export const site = {
       features: ["Prise de rendez-vous", "Galerie horizontale", "Tarifs par catégorie"],
       colors: ["#faf7f3", "#a8845f", "#161413"],
       image: "/previews/coiffure.jpg",
-      url: process.env.NEXT_PUBLIC_URL_COIFFURE ?? "",
+      url: "https://coiffure-demo.vercel.app",
     },
   ],
   offer: [

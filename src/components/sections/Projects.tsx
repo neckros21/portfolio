@@ -30,7 +30,7 @@ function BrowserFrame({ project }: { project: Project }) {
           <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
           <span className="ml-3 flex-1 truncate rounded-md bg-bg px-3 py-1 text-xs text-muted">
-            {project.url ? project.url.replace(/^https?:\/\//, "") : `${project.slug}-demo.vercel.app`}
+            {project.url.replace(/^https?:\/\//, "")}
           </span>
         </div>
         <div className="relative aspect-[16/10]">
@@ -88,14 +88,10 @@ export function Projects() {
                 ))}
                 <span className="ml-2 rounded-full bg-surface px-3 py-1 text-xs text-muted">Projet concept</span>
               </div>
-              {p.url ? (
-                <a href={p.url} target="_blank" rel="noopener" className="group mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-medium text-bg">
-                  Voir le site
-                  <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
-                </a>
-              ) : (
-                <span className="mt-8 inline-flex rounded-full border border-line px-6 py-3.5 text-fg/50">Bientôt en ligne</span>
-              )}
+              <a href={p.url} target="_blank" rel="noopener" className="group mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-medium text-bg">
+                Voir le site
+                <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+              </a>
             </Reveal>
           </article>
         ))}
