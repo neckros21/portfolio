@@ -24,12 +24,12 @@ function BrowserFrame({ project }: { project: Project }) {
 
   return (
     <div className="[perspective:1400px]" onPointerMove={onMove} onPointerLeave={() => { mx.set(0); my.set(0); }}>
-      <motion.div style={{ rotateX, rotateY }} className="overflow-hidden rounded-xl border border-line bg-night-2 shadow-[0_40px_120px_-40px_rgba(201,243,107,0.15)]">
+      <motion.div style={{ rotateX, rotateY }} className="overflow-hidden rounded-xl border border-line bg-surface shadow-[0_40px_120px_-40px_rgba(91,91,246,0.22)]">
         <div className="flex items-center gap-2 border-b border-line px-4 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-          <span className="ml-3 flex-1 truncate rounded-md bg-night px-3 py-1 text-xs text-dim">
+          <span className="ml-3 flex-1 truncate rounded-md bg-bg px-3 py-1 text-xs text-muted">
             {project.url ? project.url.replace(/^https?:\/\//, "") : `${project.slug}-demo.vercel.app`}
           </span>
         </div>
@@ -47,12 +47,12 @@ export function Projects() {
       <div className="mb-20 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div>
           <Reveal>
-            <p className="mb-5 text-sm text-lime">Projets</p>
+            <p className="mb-5 text-sm text-accent">Projets</p>
           </Reveal>
           <SplitText text="Trois univers, trois sites sur mesure." className="max-w-3xl text-4xl leading-[1.05] font-semibold tracking-[-0.03em] md:text-6xl" />
         </div>
         <Reveal delay={0.2}>
-          <p className="max-w-sm text-snow/55">
+          <p className="max-w-sm text-fg/55">
             Projets concepts réalisés pour montrer ce que je peux construire pour votre activité. Cliquez pour les essayer en vrai.
           </p>
         </Reveal>
@@ -68,33 +68,33 @@ export function Projects() {
               <BrowserFrame project={p} />
             </Reveal>
             <Reveal delay={0.15}>
-              <div className="flex items-center gap-3 text-sm text-dim">
+              <div className="flex items-center gap-3 text-sm text-muted">
                 <span>0{i + 1}</span>
                 <span className="h-px w-8 bg-line" />
                 <span>{p.sector}</span>
               </div>
               <h3 className="mt-5 font-serif text-5xl md:text-6xl">{p.name}</h3>
-              <p className="mt-5 leading-relaxed text-snow/65">{p.text}</p>
+              <p className="mt-5 leading-relaxed text-fg/65">{p.text}</p>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {p.features.map((f) => (
-                  <li key={f} className="rounded-full border border-line px-3 py-1.5 text-xs text-snow/75">
+                  <li key={f} className="rounded-full border border-line px-3 py-1.5 text-xs text-fg/75">
                     {f}
                   </li>
                 ))}
               </ul>
               <div className="mt-6 flex items-center gap-2" aria-label="Palette de couleurs">
                 {p.colors.map((c) => (
-                  <span key={c} className="h-6 w-6 rounded-full border border-white/10" style={{ background: c }} />
+                  <span key={c} className="h-6 w-6 rounded-full border border-line" style={{ background: c }} />
                 ))}
-                <span className="ml-2 rounded-full bg-night-2 px-3 py-1 text-xs text-dim">Projet concept</span>
+                <span className="ml-2 rounded-full bg-surface px-3 py-1 text-xs text-muted">Projet concept</span>
               </div>
               {p.url ? (
-                <a href={p.url} target="_blank" rel="noopener" className="group mt-8 inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3.5 font-medium text-night">
+                <a href={p.url} target="_blank" rel="noopener" className="group mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-medium text-bg">
                   Voir le site
                   <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
                 </a>
               ) : (
-                <span className="mt-8 inline-flex rounded-full border border-line px-6 py-3.5 text-snow/50">Bientôt en ligne</span>
+                <span className="mt-8 inline-flex rounded-full border border-line px-6 py-3.5 text-fg/50">Bientôt en ligne</span>
               )}
             </Reveal>
           </article>

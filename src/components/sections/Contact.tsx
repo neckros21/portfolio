@@ -8,14 +8,14 @@ import { Reveal } from "@/components/motion/Reveal";
 export function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden py-32 md:py-48">
-      <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/2 h-[420px] w-[900px] -translate-x-1/2 translate-y-1/2 rounded-full bg-lime/15 blur-[120px]" />
+      <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/2 h-[420px] w-[900px] -translate-x-1/2 translate-y-1/2 rounded-full bg-accent/15 blur-[120px]" />
       <div className="relative mx-auto max-w-5xl px-5 text-center md:px-10">
         <Reveal>
-          <p className="mb-6 text-sm text-lime">Contact</p>
+          <p className="mb-6 text-sm text-accent">Contact</p>
         </Reveal>
         <SplitText text="Un projet de site ? Parlons-en." className="text-5xl leading-[1.02] font-semibold tracking-[-0.04em] md:text-8xl" />
         <Reveal delay={0.2}>
-          <p className="mx-auto mt-8 max-w-lg text-lg text-snow/60">
+          <p className="mx-auto mt-8 max-w-lg text-lg text-fg/60">
             Écrivez-moi sur Malt : je réponds en moins d&apos;une heure et je vous propose un premier échange gratuit.
           </p>
         </Reveal>
@@ -26,7 +26,7 @@ export function Contact() {
             rel="noopener"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-12 inline-flex items-center gap-3 rounded-full bg-lime px-10 py-5 text-lg font-medium text-night"
+            className="mt-12 inline-flex items-center gap-3 rounded-full bg-accent px-10 py-5 text-lg font-medium text-bg"
           >
             Me contacter sur Malt
             <span>↗</span>
@@ -34,14 +34,14 @@ export function Contact() {
         </Reveal>
         <Reveal delay={0.4}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <span className="text-sm text-dim">Ou retrouvez-moi sur</span>
+            <span className="text-sm text-muted">Ou retrouvez-moi sur</span>
             {site.socials.slice(1).map((s) => (
               <a
                 key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noopener"
-                className="group inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-lime hover:text-lime"
+                className="group inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-accent hover:text-accent"
               >
                 {s.label}
                 <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>

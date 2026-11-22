@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
-@theme {
-  --color-night: #0c0c0d;
-  --color-night-2: #151517;
-  --color-line: #26262a;
-  --color-snow: #f2f1ee;
-  --color-dim: #8d8c89;
-  --color-lime: #c9f36b;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist), system-ui, sans-serif;
   --font-serif: var(--font-instrument), Georgia, serif;
+}
+
+@theme {
   --spacing-18: 4.5rem;
   --animate-marquee: marquee 30s linear infinite;
 
@@ -19,15 +24,51 @@
   }
 }
 
+/* Thème clair (par défaut) */
+:root {
+  --bg: #f7f6f3;
+  --surface: #efede8;
+  --line: #dedbd4;
+  --fg: #111113;
+  --muted: #6b6a67;
+  --accent: #5b5bf6;
+  color-scheme: light;
+}
+
+/* Thème sombre : préférence système, sauf si l'utilisateur a choisi le clair */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e0e11;
+    --surface: #16161a;
+    --line: #2a2a30;
+    --fg: #f2f1ee;
+    --muted: #8d8c92;
+    --accent: #8a8aff;
+    color-scheme: dark;
+  }
+}
+
+/* Thème sombre choisi explicitement */
+:root[data-theme="dark"] {
+  --bg: #0e0e11;
+  --surface: #16161a;
+  --line: #2a2a30;
+  --fg: #f2f1ee;
+  --muted: #8d8c92;
+  --accent: #8a8aff;
+  color-scheme: dark;
+}
+
 body {
-  background: var(--color-night);
-  color: var(--color-snow);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 ::selection {
-  background: var(--color-lime);
-  color: var(--color-night);
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .link-underline {
