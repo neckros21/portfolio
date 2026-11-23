@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       locale: lang === "fr" ? "fr_BE" : "en_GB",
       title: `${site.name} — ${c.role}`,
       description: c.description,
-      images: [{ url: "/previews/coiffure.jpg", width: 1440, height: 900 }],
+      images: [{ url: "/previews/mode.jpg", width: 1440, height: 900 }],
     },
     robots: { index: true, follow: true },
   };

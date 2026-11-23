@@ -20,11 +20,11 @@ export const site = {
     { id: "shop", href: "https://www.fiverr.com/pamenoda/build-a-modern-ecommerce-website-with-nextjs-and-stripe" },
   ],
   projects: [
+    { slug: "mode", name: "Maison Sable", colors: ["#f5f2ed", "#a27a52", "#161514"], image: "/previews/mode.jpg", url: "https://mode-demo.vercel.app" },
+    { slug: "chocolaterie", name: "Lune", colors: ["#f7f1e8", "#b5813f", "#2a1912"], image: "/previews/chocolaterie.jpg", url: "https://chocolaterie-demo.vercel.app" },
     { slug: "boulangerie", name: "Maison Aurèle", colors: ["#f6f0e6", "#8a5a35", "#2a1e16"], image: "/previews/boulangerie.jpg", url: "https://boulangerie-demo-eight.vercel.app" },
     { slug: "artisan", name: "Ardent Rénovation", colors: ["#f3f2ee", "#e8622a", "#1c2126"], image: "/previews/artisan.jpg", url: "https://artisan-demo-ebon.vercel.app" },
     { slug: "coiffure", name: "Salon Ivoire", colors: ["#faf7f3", "#a8845f", "#161413"], image: "/previews/coiffure.jpg", url: "https://coiffure-demo.vercel.app" },
-    { slug: "chocolaterie", name: "Lune", colors: ["#f7f1e8", "#b5813f", "#2a1912"], image: "/previews/chocolaterie.jpg", url: "https://chocolaterie-demo.vercel.app" },
-    { slug: "mode", name: "Maison Sable", colors: ["#f5f2ed", "#a27a52", "#161514"], image: "/previews/mode.jpg", url: "https://mode-demo.vercel.app" },
   ],
 };
 

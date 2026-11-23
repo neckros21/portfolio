@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useContent, useLang } from "@/components/LangProvider";
 
 const FORM_ALIAS = "1caf13d06081d3093035c445cfc89cb3";
@@ -19,6 +19,9 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [projectIdx, setProjectIdx] = useState(0);
+  // Anti-spam : moment où le visiteur commence à remplir, et dernier envoi
+  const startedAt = useRef(0);
+  const lastSentAt = useRef(0);
   const project = projects[projectIdx];
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -32,6 +35,19 @@ export function ContactForm() {
     setErrors(next);
     if (Object.keys(next).length) return;
 
+    // Robots : champ piège rempli, ou formulaire rempli en moins de 3 secondes → on fait semblant d'envoyer
+    const now = Date.now();
+    if (data._honey || !startedAt.current || now - startedAt.current < 3000) {
+      setStatus("sent");
+      form.reset();
+      return;
+    }
+    // Pas plus d'un message toutes les 30 secondes depuis la même page
+    if (now - lastSentAt.current < 30000) {
+      setStatus("error");
+      return;
+    }
+
     setStatus("sending");
     try {
       // FormSubmit : l'alias remplace l'adresse e-mail, qui n'apparaît donc pas dans le code du site
@@ -43,7 +59,6 @@ export function ContactForm() {
           _template: "table",
           _captcha: "false",
           _replyto: data.email,
-          _honey: data._honey ?? "",
           Nom: data.name.trim(),
           "E-mail": data.email,
           Projet: project,
@@ -53,6 +68,7 @@ export function ContactForm() {
       });
       const json = (await res.json().catch(() => null)) as { success?: string | boolean } | null;
       if (!res.ok || String(json?.success) !== "true") throw new Error();
+      lastSentAt.current = Date.now();
       setStatus("sent");
       form.reset();
     } catch {
@@ -86,7 +102,7 @@ export function ContactForm() {
             </button>
           </motion.div>
         ) : (
-          <motion.form key="form" exit={{ opacity: 0, y: -12 }} onSubmit={onSubmit} noValidate className="grid gap-5 text-left">
+          <motion.form key="form" exit={{ opacity: 0, y: -12 }} onSubmit={onSubmit} onFocusCapture={() => { if (!startedAt.current) startedAt.current = Date.now(); }} noValidate className="grid gap-5 text-left">
             <div>
               <p className="mb-3 text-sm text-muted">{f.project}</p>
               <div className="flex flex-wrap gap-2">
@@ -108,12 +124,12 @@ export function ContactForm() {
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="grid gap-2">
                 <span className="text-sm text-muted">{f.name}</span>
-                <input name="name" autoComplete="name" placeholder={f.namePh} aria-invalid={!!errors.name} className={`${field} ${errors.name ? "border-red-500/70" : "border-line"}`} />
+                <input name="name" maxLength={100} autoComplete="name" placeholder={f.namePh} aria-invalid={!!errors.name} className={`${field} ${errors.name ? "border-red-500/70" : "border-line"}`} />
                 {errors.name && <span className="text-xs text-red-500">{errors.name}</span>}
               </label>
               <label className="grid gap-2">
                 <span className="text-sm text-muted">{f.email}</span>
-                <input name="email" type="email" autoComplete="email" placeholder={f.emailPh} aria-invalid={!!errors.email} className={`${field} ${errors.email ? "border-red-500/70" : "border-line"}`} />
+                <input name="email" type="email" maxLength={200} autoComplete="email" placeholder={f.emailPh} aria-invalid={!!errors.email} className={`${field} ${errors.email ? "border-red-500/70" : "border-line"}`} />
                 {errors.email && <span className="text-xs text-red-500">{errors.email}</span>}
               </label>
             </div>
@@ -122,6 +138,7 @@ export function ContactForm() {
               <span className="text-sm text-muted">{f.message}</span>
               <textarea
                 name="message"
+                maxLength={4000}
                 rows={5}
                 placeholder={f.messagePh}
                 aria-invalid={!!errors.message}
