@@ -13,13 +13,13 @@ export const site = {
     {
       label: "Site vitrine",
       text: "Un site rapide et sur mesure pour présenter votre activité.",
-      from: "175 $",
+      from: "150 €",
       href: "https://www.fiverr.com/pamenoda/build-a-modern-fast-business-website-with-nextjs-and-react",
     },
     {
       label: "Boutique en ligne",
       text: "Une boutique e-commerce avec panier, paiement Stripe et plusieurs langues.",
-      from: "400 $",
+      from: "370 €",
       href: "https://www.fiverr.com/pamenoda/build-a-modern-ecommerce-website-with-nextjs-and-stripe",
     },
   ],
