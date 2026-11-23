@@ -110,7 +110,7 @@ const fr = {
     from: "dès",
     viewGig: "Voir le gig Fiverr",
     gigs: {
-      vitrine: { label: "Site vitrine", text: "Un site rapide et sur mesure pour présenter votre activité.", from: "150 €" },
+      vitrine: { label: "Site vitrine", text: "Un site rapide et sur mesure pour présenter votre activité.", from: "75 €" },
       shop: { label: "Boutique en ligne", text: "Une boutique e-commerce avec panier, paiement Stripe et plusieurs langues.", from: "370 €" },
     } as Record<string, { label: string; text: string; from: string }>,
     socials: "Retrouvez-moi aussi sur",
@@ -227,7 +227,7 @@ const en: Content = {
     from: "from",
     viewGig: "View the Fiverr gig",
     gigs: {
-      vitrine: { label: "Business website", text: "A fast, tailor-made website to showcase your business.", from: "€150" },
+      vitrine: { label: "Business website", text: "A fast, tailor-made website to showcase your business.", from: "€75" },
       shop: { label: "Online store", text: "An e-commerce store with cart, Stripe payments and multiple languages.", from: "€370" },
     },
     socials: "Also find me on",
