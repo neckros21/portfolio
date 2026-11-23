@@ -2,8 +2,10 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState, type FormEvent } from "react";
+import { useContent, useLang } from "@/components/LangProvider";
 
-const projects = ["Site vitrine", "Boutique en ligne", "Refonte d'un site", "Autre"];
+const FORM_ALIAS = "1caf13d06081d3093035c445cfc89cb3";
+
 type Status = "idle" | "sending" | "sent" | "error";
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
@@ -11,29 +13,46 @@ const field =
   "w-full rounded-2xl border bg-surface/60 px-5 py-4 text-fg outline-none transition placeholder:text-muted/70 focus:border-accent focus:ring-4 focus:ring-accent/10";
 
 export function ContactForm() {
+  const f = useContent().form;
+  const lang = useLang();
+  const projects = f.projects;
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
-  const [project, setProject] = useState(projects[0]);
+  const [projectIdx, setProjectIdx] = useState(0);
+  const project = projects[projectIdx];
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
     const next: Errors = {};
-    if (!data.name?.trim()) next.name = "Indiquez votre nom.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email ?? "")) next.email = "Adresse e-mail invalide.";
-    if ((data.message ?? "").trim().length < 10) next.message = "Quelques mots de plus sur votre projet ?";
+    if (!data.name?.trim()) next.name = f.errName;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email ?? "")) next.email = f.errEmail;
+    if ((data.message ?? "").trim().length < 10) next.message = f.errMessage;
     setErrors(next);
     if (Object.keys(next).length) return;
 
     setStatus("sending");
     try {
-      const res = await fetch("/api/contact", {
+      // FormSubmit : l'alias remplace l'adresse e-mail, qui n'apparaît donc pas dans le code du site
+      const res = await fetch(`https://formsubmit.co/ajax/${FORM_ALIAS}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, project }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `Nouveau message du portfolio — ${data.name.trim()}`,
+          _template: "table",
+          _captcha: "false",
+          _replyto: data.email,
+          _honey: data._honey ?? "",
+          Nom: data.name.trim(),
+          "E-mail": data.email,
+          Projet: project,
+          Langue: lang.toUpperCase(),
+          Message: data.message.trim(),
+        }),
       });
-      if (!res.ok) throw new Error();
+      const json = (await res.json().catch(() => null)) as { success?: string | boolean } | null;
+      if (!res.ok || String(json?.success) !== "true") throw new Error();
       setStatus("sent");
       form.reset();
     } catch {
@@ -60,22 +79,22 @@ export function ContactForm() {
             >
               ✓
             </motion.span>
-            <h3 className="mt-6 text-2xl font-semibold tracking-tight">Message envoyé !</h3>
-            <p className="mt-3 max-w-sm text-fg/60">Merci, je vous réponds très vite, en général dans l&apos;heure.</p>
+            <h3 className="mt-6 text-2xl font-semibold tracking-tight">{f.sentTitle}</h3>
+            <p className="mt-3 max-w-sm text-fg/60">{f.sentText}</p>
             <button onClick={() => setStatus("idle")} className="link-underline mt-8 text-sm text-accent">
-              Envoyer un autre message
+              {f.again}
             </button>
           </motion.div>
         ) : (
           <motion.form key="form" exit={{ opacity: 0, y: -12 }} onSubmit={onSubmit} noValidate className="grid gap-5 text-left">
             <div>
-              <p className="mb-3 text-sm text-muted">Votre projet</p>
+              <p className="mb-3 text-sm text-muted">{f.project}</p>
               <div className="flex flex-wrap gap-2">
-                {projects.map((p) => (
+                {projects.map((p, i) => (
                   <button
                     key={p}
                     type="button"
-                    onClick={() => setProject(p)}
+                    onClick={() => setProjectIdx(i)}
                     aria-pressed={project === p}
                     className={`relative rounded-full border px-4 py-2 text-sm transition-colors ${project === p ? "border-accent text-bg" : "border-line text-fg/70 hover:border-fg/30"}`}
                   >
@@ -88,23 +107,23 @@ export function ContactForm() {
 
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="grid gap-2">
-                <span className="text-sm text-muted">Nom</span>
-                <input name="name" autoComplete="name" placeholder="Votre nom" aria-invalid={!!errors.name} className={`${field} ${errors.name ? "border-red-500/70" : "border-line"}`} />
+                <span className="text-sm text-muted">{f.name}</span>
+                <input name="name" autoComplete="name" placeholder={f.namePh} aria-invalid={!!errors.name} className={`${field} ${errors.name ? "border-red-500/70" : "border-line"}`} />
                 {errors.name && <span className="text-xs text-red-500">{errors.name}</span>}
               </label>
               <label className="grid gap-2">
-                <span className="text-sm text-muted">E-mail</span>
-                <input name="email" type="email" autoComplete="email" placeholder="vous@exemple.com" aria-invalid={!!errors.email} className={`${field} ${errors.email ? "border-red-500/70" : "border-line"}`} />
+                <span className="text-sm text-muted">{f.email}</span>
+                <input name="email" type="email" autoComplete="email" placeholder={f.emailPh} aria-invalid={!!errors.email} className={`${field} ${errors.email ? "border-red-500/70" : "border-line"}`} />
                 {errors.email && <span className="text-xs text-red-500">{errors.email}</span>}
               </label>
             </div>
 
             <label className="grid gap-2">
-              <span className="text-sm text-muted">Message</span>
+              <span className="text-sm text-muted">{f.message}</span>
               <textarea
                 name="message"
                 rows={5}
-                placeholder="Votre activité, ce que vous aimeriez sur votre site, vos délais…"
+                placeholder={f.messagePh}
                 aria-invalid={!!errors.message}
                 className={`${field} resize-none ${errors.message ? "border-red-500/70" : "border-line"}`}
               />
@@ -112,10 +131,10 @@ export function ContactForm() {
             </label>
 
             {/* Champ piège anti-spam, invisible pour les visiteurs */}
-            <input name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+            <input name="_honey" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0 opacity-0" />
 
             <div className="flex flex-col-reverse gap-4 xl:flex-row xl:items-center xl:justify-between">
-              <p className="text-center text-xs text-muted xl:text-left">Réponse en moins d&apos;une heure · Premier échange gratuit</p>
+              <p className="text-center text-xs text-muted xl:text-left">{f.note}</p>
               <motion.button
                 type="submit"
                 disabled={status === "sending"}
@@ -126,18 +145,18 @@ export function ContactForm() {
                 {status === "sending" ? (
                   <>
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-bg/40 border-t-bg" />
-                    Envoi…
+                    {f.sending}
                   </>
                 ) : (
                   <>
-                    Envoyer le message <span aria-hidden>→</span>
+                    {f.send} <span aria-hidden>→</span>
                   </>
                 )}
               </motion.button>
             </div>
             {status === "error" && (
               <p className="text-sm text-red-500" role="alert">
-                L&apos;envoi n&apos;a pas fonctionné. Réessayez, ou écrivez-moi directement sur WhatsApp.
+                {f.error}
               </p>
             )}
           </motion.form>

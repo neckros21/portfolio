@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
-import { site } from "@/content/site";
+import { whatsappHref } from "@/content/site";
+import { useContent, useLang } from "@/components/LangProvider";
 
 export function WhatsAppIcon({ className = "" }: { className?: string }) {
   return (
@@ -16,16 +17,18 @@ export function WhatsAppIcon({ className = "" }: { className?: string }) {
 export function WhatsAppFloat() {
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
+  const lang = useLang();
+  const c = useContent();
   useMotionValueEvent(scrollY, "change", (y) => setVisible(y > 300));
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.a
-          href={site.whatsapp.href}
+          href={whatsappHref(lang)}
           target="_blank"
           rel="noopener"
-          aria-label="Discuter sur WhatsApp"
+          aria-label={c.whatsapp.aria}
           initial={{ opacity: 0, scale: 0.6, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 20 }}
@@ -35,7 +38,7 @@ export function WhatsAppFloat() {
           className="group fixed right-5 bottom-5 z-50 flex items-center md:right-8 md:bottom-8"
         >
           <span className="pointer-events-none mr-3 hidden translate-x-2 rounded-full bg-fg px-4 py-2 text-sm font-medium whitespace-nowrap text-bg opacity-0 shadow-lg transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 md:block">
-            Une question ? Écrivez-moi
+            {c.whatsapp.bubble}
           </span>
           <span className="relative grid h-14 w-14 place-items-center rounded-full bg-[#25d366] text-white shadow-[0_12px_30px_-8px_rgba(37,211,102,0.7)]">
             <span className="absolute inset-0 animate-ping rounded-full bg-[#25d366] opacity-25 [animation-duration:2.4s]" />

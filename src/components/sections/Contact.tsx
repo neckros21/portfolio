@@ -1,25 +1,28 @@
 "use client";
 
 import { motion } from "motion/react";
-import { site } from "@/content/site";
+import { site, whatsappHref } from "@/content/site";
+import { useContent, useLang } from "@/components/LangProvider";
 import { SplitText } from "@/components/motion/SplitText";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { WhatsAppIcon } from "@/components/WhatsAppFloat";
 
 export function Contact() {
+  const lang = useLang();
+  const c = useContent().contact;
   return (
     <section id="contact" className="relative overflow-hidden py-32 md:py-48">
       <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/2 h-[420px] w-[900px] -translate-x-1/2 translate-y-1/2 rounded-full bg-accent/15 blur-[120px]" />
       <div className="relative mx-auto max-w-7xl px-5 md:px-10">
         <div className="text-center">
           <Reveal>
-            <p className="mb-6 text-sm text-accent">Contact</p>
+            <p className="mb-6 text-sm text-accent">{c.eyebrow}</p>
           </Reveal>
-          <SplitText text="Un projet de site ? Parlons-en." className="text-5xl leading-[1.02] font-semibold tracking-[-0.04em] md:text-8xl" />
+          <SplitText text={c.title} className="text-5xl leading-[1.02] font-semibold tracking-[-0.04em] md:text-8xl" />
           <Reveal delay={0.2}>
             <p className="mx-auto mt-8 max-w-lg text-lg text-fg/60">
-              Laissez-moi un message, écrivez-moi sur WhatsApp ou commandez directement sur Fiverr. Je réponds en moins d&apos;une heure.
+              {c.text}
             </p>
           </Reveal>
         </div>
@@ -32,9 +35,9 @@ export function Contact() {
           <div className="grid content-start gap-6">
             <Reveal delay={0.2}>
               <div className="rounded-3xl border border-line bg-bg/70 p-6 backdrop-blur md:p-8">
-                <p className="text-sm text-muted">Contact direct</p>
+                <p className="text-sm text-muted">{c.direct}</p>
                 <motion.a
-                  href={site.whatsapp.href}
+                  href={whatsappHref(lang)}
                   target="_blank"
                   rel="noopener"
                   whileHover={{ scale: 1.02 }}
@@ -42,7 +45,7 @@ export function Contact() {
                   className="mt-5 flex items-center gap-4 rounded-2xl bg-[#25d366] px-5 py-4 font-medium text-white"
                 >
                   <WhatsAppIcon className="h-6 w-6" />
-                  <span className="flex-1">Discuter sur WhatsApp</span>
+                  <span className="flex-1">{c.whatsapp}</span>
                   <span aria-hidden>↗</span>
                 </motion.a>
                 <a href={`tel:${site.phone.tel}`} className="group mt-3 flex items-center gap-4 rounded-2xl border border-line px-5 py-4 transition-colors hover:border-accent">
@@ -50,11 +53,11 @@ export function Contact() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.28 6.72 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.37c0-.52-.35-.97-.85-1.09l-4.42-1.1c-.44-.12-.9.05-1.17.41l-.97 1.29a1.13 1.13 0 0 1-1.21.38 12.04 12.04 0 0 1-7.14-7.14 1.13 1.13 0 0 1 .38-1.21l1.29-.97c.36-.27.53-.73.41-1.17l-1.1-4.42a1.13 1.13 0 0 0-1.09-.85H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25z" />
                   </svg>
                   <span className="flex-1 tabular-nums">{site.phone.label}</span>
-                  <span className="text-sm text-muted transition-colors group-hover:text-accent">Appeler</span>
+                  <span className="text-sm text-muted transition-colors group-hover:text-accent">{c.call}</span>
                 </a>
                 <a href={site.malt} target="_blank" rel="noopener" className="group mt-3 flex items-center gap-4 rounded-2xl border border-line px-5 py-4 transition-colors hover:border-accent">
                   <span className="grid h-5 w-5 place-items-center rounded-full bg-[#fc5757] text-[10px] font-bold text-white">M</span>
-                  <span className="flex-1">Mon profil Malt</span>
+                  <span className="flex-1">{c.malt}</span>
                   <span aria-hidden className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                 </a>
               </div>
@@ -63,11 +66,13 @@ export function Contact() {
             <Reveal delay={0.3}>
               <div className="rounded-3xl border border-line bg-bg/70 p-6 backdrop-blur md:p-8">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-muted">Commander sur Fiverr</p>
-                  <span className="rounded-full bg-[#1dbf73]/15 px-3 py-1 text-xs font-medium text-[#1a9e60] dark:text-[#3ddc91]">Paiement sécurisé</span>
+                  <p className="text-sm text-muted">{c.fiverr}</p>
+                  <span className="rounded-full bg-[#1dbf73]/15 px-3 py-1 text-xs font-medium text-[#1a9e60] dark:text-[#3ddc91]">{c.secure}</span>
                 </div>
                 <div className="mt-5 grid gap-3">
-                  {site.gigs.map((g) => (
+                  {site.gigs.map((gig) => {
+                    const g = { ...gig, ...c.gigs[gig.id] };
+                    return (
                     <motion.a
                       key={g.href}
                       href={g.href}
@@ -78,15 +83,16 @@ export function Contact() {
                     >
                       <div className="flex items-baseline justify-between gap-3">
                         <span className="font-serif text-2xl">{g.label}</span>
-                        <span className="shrink-0 text-sm text-muted">dès {g.from}</span>
+                        <span className="shrink-0 text-sm text-muted">{c.from} {g.from}</span>
                       </div>
                       <p className="mt-1 text-sm text-fg/60">{g.text}</p>
                       <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#1a9e60] dark:text-[#3ddc91]">
-                        Voir le gig Fiverr
+                        {c.viewGig}
                         <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
                       </span>
                     </motion.a>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </Reveal>
@@ -95,7 +101,7 @@ export function Contact() {
 
         <Reveal delay={0.2}>
           <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
-            <span className="text-sm text-muted">Retrouvez-moi aussi sur</span>
+            <span className="text-sm text-muted">{c.socials}</span>
             {site.socials.slice(2).map((s) => (
               <a
                 key={s.label}

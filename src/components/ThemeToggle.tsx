@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useSyncExternalStore } from "react";
+import { useContent } from "@/components/LangProvider";
 
 type Theme = "light" | "dark";
 
@@ -23,6 +24,7 @@ function subscribe(cb: () => void) {
 }
 
 export function ThemeToggle() {
+  const c = useContent();
   const theme = useSyncExternalStore<Theme | null>(subscribe, currentTheme, () => null);
 
   function toggle() {
@@ -38,7 +40,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={isDark ? "Passer en thème clair" : "Passer en thème sombre"}
+      aria-label={isDark ? c.theme.toLight : c.theme.toDark}
       className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full border border-line text-fg/80 transition-colors hover:border-fg/40 hover:text-fg"
     >
       <AnimatePresence mode="wait" initial={false}>

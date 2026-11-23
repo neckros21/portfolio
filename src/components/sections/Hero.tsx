@@ -4,8 +4,10 @@ import { motion } from "motion/react";
 import { site } from "@/content/site";
 import { SplitText } from "@/components/motion/SplitText";
 import { ease } from "@/components/motion/Reveal";
+import { useContent } from "@/components/LangProvider";
 
 export function Hero() {
+  const c = useContent();
   const items = [...site.stack, ...site.stack];
   return (
     <section id="top" className="relative overflow-hidden pt-36 md:pt-44">
@@ -24,11 +26,11 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
           </span>
-          Disponible pour de nouveaux projets
+          {c.hero.available}
         </motion.p>
         <SplitText
           as="h1"
-          text={site.hero.title}
+          text={c.hero.title}
           delay={0.3}
           className="max-w-5xl text-5xl leading-[1.02] font-semibold tracking-[-0.04em] sm:text-6xl md:text-[5.5rem]"
         />
@@ -38,14 +40,14 @@ export function Hero() {
           transition={{ duration: 0.9, ease, delay: 1 }}
           className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between"
         >
-          <p className="max-w-xl text-lg leading-relaxed text-fg/65">{site.hero.text}</p>
+          <p className="max-w-xl text-lg leading-relaxed text-fg/65">{c.hero.text}</p>
           <div className="flex shrink-0 gap-3">
             <a href="#projets" className="group flex items-center gap-2 rounded-full bg-fg px-6 py-3.5 font-medium text-bg">
-              Voir mes projets
+              {c.hero.ctaProjects}
               <span className="transition-transform group-hover:translate-y-0.5">↓</span>
             </a>
             <a href={site.malt} target="_blank" rel="noopener" className="rounded-full border border-line px-6 py-3.5 transition-colors hover:border-fg/40">
-              Profil Malt
+              {c.hero.ctaMalt}
             </a>
           </div>
         </motion.div>
@@ -56,7 +58,7 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.3 }}
         className="mt-24 overflow-hidden border-y border-line py-5"
-        aria-label={`Technologies : ${site.stack.join(", ")}`}
+        aria-label={`${c.hero.stackLabel}: ${site.stack.join(", ")}`}
       >
         <div className="animate-marquee flex w-max gap-12 whitespace-nowrap" aria-hidden>
           {[...items, ...items].map((t, i) => (
