@@ -1,6 +1,6 @@
 export const site = {
   name: "Alexandros D.",
-  role: "Développeur web — sites vitrines",
+  role: "Développeur web — sites vitrines & e-commerce",
   area: "Bruxelles · France & Belgique",
   company: "AlexTechTrade",
   bce: "BE 1031.651.121",
@@ -12,15 +12,15 @@ export const site = {
   ],
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://alexandros-drimis.vercel.app",
   description:
-    "Alexandros D., développeur web à Bruxelles : sites vitrines modernes, rapides et bien référencés pour commerçants, artisans et PME. Découvrez mes réalisations.",
+    "Alexandros D., développeur web à Bruxelles : sites vitrines et boutiques en ligne modernes, rapides et bien référencés pour commerçants, artisans et PME. Découvrez mes réalisations.",
   nav: [
     { href: "#projets", label: "Projets" },
     { href: "#offre", label: "Offre" },
     { href: "#contact", label: "Contact" },
   ],
   hero: {
-    title: "Des sites vitrines qui donnent envie de vous contacter.",
-    text: "Je conçois et développe des sites modernes, rapides et faciles à trouver sur Google, pour les commerçants, artisans et PME. Développeur full-stack chez AXA Belgique, j'apporte la même rigueur à chaque projet.",
+    title: "Des sites qui donnent envie de vous contacter — et d'acheter.",
+    text: "Je conçois et développe des sites vitrines et des boutiques en ligne modernes, rapides et faciles à trouver sur Google, pour les commerçants, artisans et PME. Développeur full-stack chez AXA Belgique, j'apporte la même rigueur à chaque projet.",
   },
   stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "SEO", "Vercel", "Responsive design"],
   projects: [
@@ -53,6 +53,26 @@ export const site = {
       colors: ["#faf7f3", "#a8845f", "#161413"],
       image: "/previews/coiffure.jpg",
       url: "https://coiffure-demo.vercel.app",
+    },
+    {
+      slug: "chocolaterie",
+      name: "Lune",
+      sector: "E-commerce · Chocolatier",
+      text: "Une boutique en ligne gourmande et bilingue FR/EN : options avec prix dynamique, message cadeau, panier animé et commande complète avec code promo.",
+      features: ["Boutique FR / EN", "Panier + commande", "Code promo", "Message cadeau"],
+      colors: ["#f7f1e8", "#b5813f", "#2a1912"],
+      image: "/previews/chocolaterie.jpg",
+      url: "https://chocolaterie-demo.vercel.app",
+    },
+    {
+      slug: "mode",
+      name: "Maison Sable",
+      sector: "E-commerce · Prêt-à-porter",
+      text: "Une boutique de mode éditoriale et bilingue FR/EN : choix de couleur et de taille, guide des tailles, tailles épuisées, panier et paiement simulé.",
+      features: ["Boutique FR / EN", "Tailles & couleurs", "Guide des tailles", "Livraison offerte"],
+      colors: ["#f5f2ed", "#a27a52", "#161514"],
+      image: "/previews/mode.jpg",
+      url: "https://mode-demo.vercel.app",
     },
   ],
   offer: [

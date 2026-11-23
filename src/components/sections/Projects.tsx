@@ -49,7 +49,7 @@ export function Projects() {
           <Reveal>
             <p className="mb-5 text-sm text-accent">Projets</p>
           </Reveal>
-          <SplitText text="Trois univers, trois sites sur mesure." className="max-w-3xl text-4xl leading-[1.05] font-semibold tracking-[-0.03em] md:text-6xl" />
+          <SplitText text="Sites vitrines et boutiques en ligne, sur mesure." className="max-w-3xl text-4xl leading-[1.05] font-semibold tracking-[-0.03em] md:text-6xl" />
         </div>
         <Reveal delay={0.2}>
           <p className="max-w-sm text-fg/55">
