@@ -5,8 +5,27 @@ export const site = {
   company: "AlexTechTrade",
   bce: "BE 1031.651.121",
   malt: "https://www.malt.fr/profile/alexandrosdrimis",
+  phone: { label: "+32 478 60 16 93", tel: "+32478601693" },
+  whatsapp: {
+    href: "https://wa.me/32478601693?text=" + encodeURIComponent("Bonjour Alexandros, j'ai vu votre portfolio et j'aimerais parler d'un projet de site."),
+  },
+  gigs: [
+    {
+      label: "Site vitrine",
+      text: "Un site rapide et sur mesure pour présenter votre activité.",
+      from: "175 $",
+      href: "https://www.fiverr.com/pamenoda/build-a-modern-fast-business-website-with-nextjs-and-react",
+    },
+    {
+      label: "Boutique en ligne",
+      text: "Une boutique e-commerce avec panier, paiement Stripe et plusieurs langues.",
+      from: "400 $",
+      href: "https://www.fiverr.com/pamenoda/build-a-modern-ecommerce-website-with-nextjs-and-stripe",
+    },
+  ],
   socials: [
     { label: "Malt", href: "https://www.malt.fr/profile/alexandrosdrimis" },
+    { label: "Fiverr", href: "https://www.fiverr.com/pamenoda" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/adrimis-407758203" },
     { label: "Instagram", href: "https://www.instagram.com/alex.drimis/" },
   ],

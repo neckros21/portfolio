@@ -5,6 +5,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Offer } from "@/components/sections/Offer";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -12,6 +13,7 @@ const jsonLd = {
   name: site.name,
   jobTitle: "Développeur web",
   url: site.url,
+  telephone: site.phone.tel,
   sameAs: site.socials.map((s) => s.href),
   address: { "@type": "PostalAddress", addressLocality: "Bruxelles", addressCountry: "BE" },
   knowsAbout: site.stack,
@@ -29,6 +31,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </>
   );
 }
