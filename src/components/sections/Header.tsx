@@ -23,6 +23,7 @@ export function Header() {
         <nav className="flex items-center gap-3 text-sm text-fg/70 sm:gap-4 md:gap-6">
           <a href="#projets" className="link-underline hidden hover:text-fg md:inline">{c.nav.projects}</a>
           <a href="#offre" className="link-underline hidden hover:text-fg md:inline">{c.nav.offer}</a>
+          <a href="#tarifs" className="link-underline hidden hover:text-fg md:inline">{c.nav.pricing}</a>
           <LangSwitch />
           <ThemeToggle />
           <a href="#contact" className="hidden rounded-full bg-accent px-4 py-2 font-medium whitespace-nowrap text-bg transition-transform hover:scale-105 sm:inline-block">

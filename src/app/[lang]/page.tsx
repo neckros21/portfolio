@@ -4,6 +4,7 @@ import { Header } from "@/components/sections/Header";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { Offer } from "@/components/sections/Offer";
+import { Pricing } from "@/components/sections/Pricing";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
@@ -31,6 +32,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <Hero />
         <Projects />
         <Offer />
+        <Pricing />
         <Contact />
       </main>
       <Footer />

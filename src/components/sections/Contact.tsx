@@ -62,40 +62,6 @@ export function Contact() {
                 </a>
               </div>
             </Reveal>
-
-            <Reveal delay={0.3}>
-              <div className="rounded-3xl border border-line bg-bg/70 p-6 backdrop-blur md:p-8">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-muted">{c.fiverr}</p>
-                  <span className="rounded-full bg-[#1dbf73]/15 px-3 py-1 text-xs font-medium text-[#1a9e60] dark:text-[#3ddc91]">{c.secure}</span>
-                </div>
-                <div className="mt-5 grid gap-3">
-                  {site.gigs.map((gig) => {
-                    const g = { ...gig, ...c.gigs[gig.id] };
-                    return (
-                    <motion.a
-                      key={g.href}
-                      href={g.href}
-                      target="_blank"
-                      rel="noopener"
-                      whileHover={{ y: -3 }}
-                      className="group block rounded-2xl border border-line p-5 transition-colors hover:border-[#1dbf73]"
-                    >
-                      <div className="flex items-baseline justify-between gap-3">
-                        <span className="font-serif text-2xl">{g.label}</span>
-                        <span className="shrink-0 text-sm text-muted">{c.from} {g.from}</span>
-                      </div>
-                      <p className="mt-1 text-sm text-fg/60">{g.text}</p>
-                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#1a9e60] dark:text-[#3ddc91]">
-                        {c.viewGig}
-                        <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-                      </span>
-                    </motion.a>
-                    );
-                  })}
-                </div>
-              </div>
-            </Reveal>
           </div>
         </div>
 
